@@ -1,5 +1,6 @@
 
 var api= require('./api');
+var apiPayLoadJson= require('./apiPayLoad.json')
 
 
 describe('API Testing', ()=>{
@@ -22,7 +23,61 @@ await expect(res.status).toEqual(200)
 
 })
 
+it('API:POST CALL', async()=>{
+const url = "https://reqres.in/api/users"
+
+const payload = 
+    {
+        "name": "manoj",
+        "job": "qa"
+    }
+
+    const res= await api.postRequest(url, payload);
+    console.log('data = ', await res.data); // Print all data
+    console.log('status:  ', await res.status); // Print ststus code
+    await expect(res.status).toEqual(201)
+    
+    
+    })
 
 
+    it('API:PAYLOAD VALIDATION', async()=>{
+        const apiPayLoadSize= apiPayLoadJson.length;
+        console.log('size', apiPayLoadSize);
+        for(let i=0; i<apiPayLoadSize; i++){
+
+const UserName= apiPayLoadJson[i].name;
+console.log('UN', UserName);
+
+        }      
+    })
+
+    it('API:GET CALL 2', async()=>{
+
+        const res= await api.getRequest('https://reqres.in/api/unknown');
+        console.log('data = ', await res.data); // Print all data
+        console.log('status:  ', await res.status); // Print ststus code
+      
+       const name= await api.calculateAPIResponse(res);
+       console.log('name output =', name)
+       //await expect(name).toEqual('cerulean')
+      
+        
+        })
+
+        it('API:PUT CALL', async()=>{
+            const url = "https://reqres.in/api/users/2";
+            const payload= {
+                "name": "morpheus",
+                "job": "zion resident"
+            }
+
+            const res= await api.putRequest(url, payload);
+            console.log('PUT data = ', await res.data); // Print all data
+            console.log('PUT status:  ', await res.status); // Print ststus code
+          
+            
+            })
+    
 
 })
