@@ -1,6 +1,6 @@
 Feature: I am going to validate the calculator App
 
-@CalculatorTesting
+@SanityTesting
 Scenario Outline:  Calculator Add functionality Testing
 
 Given I will navigate to "calc" page
@@ -13,7 +13,7 @@ Examples:
 | 2 | 7 | 9 |
 
 
-
+@SmokeTesting
   Scenario Outline: Angular site search functionality Testing
 
   Given I will navigate to "Angularjs" page
